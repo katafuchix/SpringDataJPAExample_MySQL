@@ -2,6 +2,8 @@ package com.example.service;
 
 import java.util.ArrayList;
 
+import org.springframework.data.domain.Page;
+
 import com.example.model.Employee;
 
 public interface EmployeeService {
@@ -13,5 +15,7 @@ public interface EmployeeService {
     void addEmployee();
     
     void deleteAllData();
+    
+    Page<Employee> getEmployees(int page, int size);
     
 }
