@@ -2,8 +2,8 @@ package com.example.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.example.service.EmployeeServiceImpl;
 
@@ -15,10 +15,13 @@ public class EmployeeController {
     EmployeeServiceImpl employeeService;
     
 	@GetMapping("/")
+    public String index(Model model) {
+        model.addAttribute("title", "コンテンツページ");
+        System.out.print("aaa");       
+        return "index";
+    }
+	/*
 	public ModelAndView listAll() {
-		
-	//logger.info("Called.");
-        //logger.error("Error.");
         
 		ModelAndView mav = new ModelAndView("index");
 		
@@ -26,6 +29,7 @@ public class EmployeeController {
 		mav.addObject("employees", employeeService.findAllEmployee());
 		return mav;
 	}
+	*/
 	
 	/*
     @GetMapping("/")

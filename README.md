@@ -1,6 +1,32 @@
 # SpringDataJPAExample_MySQL
 
 
+## Spring Data JPA
+
+- Spring Data JPAは、Java Persistence API (JPA)の上に構築されており、ORM（オブジェクト関係マッピング）をサポートします。
+- ORMは、Javaオブジェクトとデータベーステーブルの間のマッピングを自動化します。
+
+
+### 特徴:
+
+1. 複雑なマッピング：
+   - エンティティ間の複雑なリレーション（1対多、多対多など）をサポートし、アノテーションを使用してマッピングを簡単に設定できます。
+
+2. キャッシュ:
+   - 二次キャッシュのサポートがあり、パフォーマンスを向上させるためにキャッシング機構を使用できます。
+
+3. クエリ言語:
+   - JPQL（Java Persistence Query Language）やネイティブSQLを使用して複雑なクエリを記述できます。
+
+4. 自動生成クエリ:
+   - メソッド名に基づいてクエリを自動生成する機能があり、リポジトリインターフェースに簡単にカスタムクエリを追加できます。
+
+5. トランザクション管理:
+   - トランザクションの管理が容易であり、@Transactionalアノテーションを使用してトランザクション境界を定義できます。
+
+
+## Example
+
 - MySQL
 
 ```
@@ -21,10 +47,10 @@ mysql> insert into `Employee` (
 - pom.xml
 
 ```
-		<!-- add -->		
-		<dependency>
-		      <groupId>jakarta.persistence</groupId>
-		      <artifactId>jakarta.persistence-api</artifactId>
-		</dependency>
-		<!-- add end -->	
+<!-- add -->		
+<dependency>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
+</dependency>
+<!-- add end -->	
 ```
