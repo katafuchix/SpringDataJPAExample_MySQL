@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout}">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 	
 	<body>
+		
+	<!--/* th:fragmentで別ファイルから読み込めるようにする */-->
 	<div th:fragment="sideber">
 		<!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -132,5 +132,6 @@
 
         </ul>
 	</div>
+	
 	</body>
 </html>
