@@ -17,7 +17,11 @@ public class Employee {
     // @GeneratedValue This annotation 
     // is used to specify the primary 
     // key generation strategy to use
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    // JPAプロバイダー がデフォルトの生成戦略を選択
+    //@GeneratedValue(strategy = GenerationType.AUTO)
+    
+    // 主キーの生成をデータベースに任せる方法 AUTO_INCREMENT 機能を利用
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 	private String role;

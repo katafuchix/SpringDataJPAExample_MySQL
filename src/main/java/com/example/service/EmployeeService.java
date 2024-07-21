@@ -17,5 +17,8 @@ public interface EmployeeService {
     void deleteAllData();
     
     Page<Employee> getEmployees(int page, int size);
-    
+
+	Employee save(Employee employee);
+	
+	void delete(int id);
 }

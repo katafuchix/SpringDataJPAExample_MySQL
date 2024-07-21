@@ -57,4 +57,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         Pageable pageable = PageRequest.of(page, size);
         return employeeRepository.findAll(pageable);
     }
+    
+    @Override
+    public Employee save(Employee employee) {
+        return employeeRepository.save(employee);
+    }
+    
+    @Override
+    public void delete(int id) {
+        employeeRepository.deleteById(id);
+    }
 }
