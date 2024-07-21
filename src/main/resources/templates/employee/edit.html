@@ -10,15 +10,21 @@
   <body>
     <div class="container">
       <h1>Editing Employee</h1>
-      <form th:action="@{/employee/{id}(id=*{id})}" th:method="put" th:object="${employee}">
+      <div class="col-sm-6">
+		<div th:if="${validationError}" th:each="error : ${validationError}">
+			<label class="text-danger" th:text="${error}"></label>
+		</div>
+      </div>
+      <form th:action="@{/employee/{id}(id=*{id})}" th:method="put" th:object="${updateRequest}">
+		<input type="hidden" th:field="${updateRequest.id}" />
         <div class="form-group">
           <label class="control-label">名前</label>
           <!-- ① -->
-          <input class="form-control" type="text" th:field="*{name}" />
+          <input class="form-control" type="text" th:field="${updateRequest.name}" />
         </div>
         <div class="form-group">
           <label class="control-label">役職</label>
-          <input class="form-control" type="text" th:field="*{role}" />
+          <input class="form-control" type="text" th:field="${updateRequest.role}" />
         </div>
         <button class="btn btn-default" type="submit">更新</button>
       </form>

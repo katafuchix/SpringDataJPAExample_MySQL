@@ -1,10 +1,14 @@
 package com.example.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.dto.EmployeeCreateRequest;
+import com.example.dto.EmployeeUpdateRequest;
 import com.example.model.Employee;
 import com.example.service.EmployeeServiceImpl;
 
@@ -40,27 +46,61 @@ public class EmployeeController {
     }
     
     @GetMapping("/employee/new")
-    public String newPlayer(Model model) {
+    public String newEmployee(Model model) {
+    	EmployeeCreateRequest createRequest = new EmployeeCreateRequest();
+	    model.addAttribute("createRequest", createRequest);
         return "/employee/new";
     }
     
     @PostMapping("/employee")
-    public String create(@ModelAttribute Employee employee) { // ⑥
-    	employeeService.save(employee);
+    //public String create(@ModelAttribute Employee employee) { // ⑥
+    public String create(@Validated @ModelAttribute EmployeeCreateRequest createRequest,
+    		BindingResult result, Model model) { 
+    	//employeeService.save(employee);
+    	
+    	List<String> errorList = new ArrayList<String>();
+		if (result.hasErrors()) {
+			for (ObjectError error : result.getAllErrors()) {
+				errorList.add(error.getDefaultMessage());
+			}
+			model.addAttribute("validationError", errorList);
+			model.addAttribute("createRequest", createRequest);
+			return "/employee/new";
+		}
+		employeeService.add(createRequest);
         return "redirect:/employee/list"; // ⑦
     }
     
     @GetMapping("/employee/{id}/edit")
     public String edit(@PathVariable Integer id, Model model) { // ⑤
     	Employee employee = employeeService.findAllEmployeeByID(id);
-        model.addAttribute("employee", employee);
+        //model.addAttribute("employee", employee);
+    	EmployeeUpdateRequest updateRequest = new EmployeeUpdateRequest();
+    	updateRequest.setId(employee.getId());
+    	updateRequest.setName(employee.getName());
+    	updateRequest.setRole(employee.getRole());
+	    model.addAttribute("updateRequest", updateRequest);
         return "employee/edit";
     }
     
     @PutMapping("/employee/{id}")
-    public String update(@PathVariable Integer id, @ModelAttribute Employee employee) {
-    	employee.setId(id);
-    	employeeService.save(employee);
+    //public String update(@PathVariable Integer id, @ModelAttribute Employee employee) {
+    public String update(@PathVariable Integer id, @Validated @ModelAttribute EmployeeUpdateRequest updateRequest,
+    		BindingResult result, Model model) { 
+    	
+    	System.out.print("##################");
+    	System.out.print(result.hasErrors());
+		if (result.hasErrors()) {
+			List<String> errorList = new ArrayList<String>();
+			for (ObjectError error : result.getAllErrors()) {
+				errorList.add(error.getDefaultMessage());
+			}
+			model.addAttribute("validationError", errorList);
+			model.addAttribute("updateRequest", updateRequest);
+			return "employee/edit";
+		}
+    	Employee employee = employeeService.findAllEmployeeByID(id);
+    	employeeService.update(employee, updateRequest);
         return "redirect:/employee/list";
     }
     

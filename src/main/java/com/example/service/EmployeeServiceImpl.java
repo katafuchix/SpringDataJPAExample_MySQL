@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.example.dto.EmployeeCreateRequest;
+import com.example.dto.EmployeeUpdateRequest;
 import com.example.model.Employee;
 import com.example.repository.EmployeeRepository;
 
@@ -67,4 +69,19 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void delete(int id) {
         employeeRepository.deleteById(id);
     }
+    
+    @Override
+	public Employee add(EmployeeCreateRequest req) {
+		Employee employee = new Employee();
+		employee.setName(req.getName());
+		employee.setRole(req.getRole());
+		return employeeRepository.save(employee);
+    }
+    
+	@Override
+	public Employee update(Employee employee, EmployeeUpdateRequest req) {
+		employee.setName(req.getName());
+		employee.setRole(req.getRole());
+		return employeeRepository.save(employee);
+	}
 }
