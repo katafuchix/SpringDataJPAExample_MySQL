@@ -29,4 +29,11 @@ public class TablesController {
         System.out.print("aaa");       
         return "table1";
     }
+	
+	@GetMapping("/table2")
+	public String table2(Model model) {
+        model.addAttribute("title", "コンテンツページ");
+        System.out.print("aaa");       
+        return "table2";
+    }
 }

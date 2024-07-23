@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout}">
+
+	<head>
+	<meta charset="UTF-8">
+	<title>table1</title>
+	</head>
+
+	<body>
+		<div layout:fragment="~{page}">
+	
+          <!-- Page Heading -->
+          <h1 class="h3 mb-2 text-gray-800">Table1</h1>
+          <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+            </div>
+            
+            
+<table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>名前</th>
+            <th>役職</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- ② -->
+          <tr>
+            <!-- ③ -->
+            <td>1</td>
+            <td>アリス</td>
+            <td>社長</td>
+            <!-- ④ -->
+            <td><a class="btn btn-default btn-xs" href="/employee/1">参照</a></td>
+            <td><a class="btn btn-default btn-xs" href="/employee/1/edit">編集</a></td>
+            <td>
+              <!-- ⑤ -->
+              <form action="/employee/1" method="post"><input type="hidden" name="_method" value="delete">
+                <input class="btn btn-default btn-xs" type="submit" value="削除">
+              </form>
+            </td>
+          </tr>
+          <tr>
+            <!-- ③ -->
+            <td>2</td>
+            <td>スーパー</td>
+            <td>部長</td>
+            <!-- ④ -->
+            <td><a class="btn btn-default btn-xs" href="/employee/2">参照</a></td>
+            <td><a class="btn btn-default btn-xs" href="/employee/2/edit">編集</a></td>
+            <td>
+              <!-- ⑤ -->
+              <form action="/employee/2" method="post"><input type="hidden" name="_method" value="delete">
+                <input class="btn btn-default btn-xs" type="submit" value="削除">
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+            
+          </div>
+
+		</div>
+	</body>
+</html>
